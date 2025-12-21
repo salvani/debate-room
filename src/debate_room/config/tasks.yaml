@@ -223,3 +223,8 @@ decide:
     Your decision must be fair, impartial, and based solely on the quality of argumentation presented.
   agent: judge
   output_file: output/06_decide.md
+  context:
+    - propose_opening
+    - oppose_opening
+    - propose_rebuttal
+    - oppose_rebuttal
