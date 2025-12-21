@@ -1,0 +1,225 @@
+propose_opening:
+  description: >
+    You are the PROPOSITION, arguing IN FAVOR of the motion: "{motion}".
+
+    This is your OPENING STATEMENT. You will have one chance to rebut your opponent later.
+
+    Structure your argument using the claim-warrant-impact framework:
+    1. STATE YOUR CASE: Clearly define what you are arguing and establish any key definitions
+    2. PRESENT MULTIPLE ARGUMENTS: Develop 2-3 independent lines of reasoning, each with:
+       - A clear CLAIM (what you assert)
+       - A logical WARRANT (why this claim is true)
+       - The IMPACT (why this matters for the debate)
+    3. PROVIDE EVIDENCE: Support your claims with examples, analogies, or logical demonstrations
+    4. ANTICIPATE OPPOSITION: Briefly address the strongest likely counterarguments
+
+    Adapt your approach to the motion type:
+    - If FACTUAL (what is true): Focus on evidence and logical proof
+    - If VALUE-BASED (what is good/right): First establish criteria for evaluation
+    - If POLICY (what should be done): Address status quo problems, your mechanism, and benefits
+
+    Remember: You have NOT heard the opposition yet. Build a robust case that can withstand attack.
+    Argue with conviction for your position - you must genuinely advocate for this side.
+  expected_output: >
+    A well-structured opening statement (500-800 words) in favor of the motion, containing:
+    - Clear thesis and definitions
+    - 2-3 distinct arguments with claims, warrants, and impacts
+    - Supporting evidence or examples
+    - Preemptive responses to likely counterarguments
+  agent: debater
+  output_file: output/01_propose_opening.md
+  async_execution: true
+
+oppose_opening:
+  description: >
+    You are the OPPOSITION, arguing AGAINST the motion: "{motion}".
+
+    This is your OPENING STATEMENT. You will have one chance to rebut your opponent later.
+
+    Structure your argument using the claim-warrant-impact framework:
+    1. STATE YOUR CASE: Clearly define your opposition and challenge any problematic definitions
+    2. PRESENT MULTIPLE ARGUMENTS: Develop 2-3 independent lines of reasoning, each with:
+       - A clear CLAIM (what you assert)
+       - A logical WARRANT (why this claim is true)
+       - The IMPACT (why this matters for the debate)
+    3. PROVIDE EVIDENCE: Support your claims with examples, analogies, or logical demonstrations
+    4. ANTICIPATE PROPOSITION: Briefly address the strongest likely arguments for the motion
+
+    Adapt your approach to the motion type:
+    - If FACTUAL (what is true): Challenge evidence, show alternative explanations, or prove the opposite
+    - If VALUE-BASED (what is good/right): Contest their criteria or show your values outweigh theirs
+    - If POLICY (what should be done): Defend status quo, attack the mechanism, or show harms outweigh benefits
+
+    Remember: You have NOT heard the proposition yet. Build a robust case that can withstand attack.
+    Argue with conviction for your position - you must genuinely advocate against the motion.
+  expected_output: >
+    A well-structured opening statement (500-800 words) against the motion, containing:
+    - Clear counter-thesis and any definitional challenges
+    - 2-3 distinct arguments with claims, warrants, and impacts
+    - Supporting evidence or examples
+    - Preemptive responses to likely proposition arguments
+  agent: debater
+  output_file: output/02_oppose_opening.md
+  async_execution: true
+
+collect_openings:
+  description: >
+    You have received both opening statements for the motion: "{motion}".
+    Simply acknowledge that both opening statements have been presented and are ready for rebuttal.
+    Do not judge or comment on the arguments - just confirm they are ready for the rebuttal phase.
+  expected_output: >
+    A brief confirmation that both opening statements are complete.
+  agent: judge
+  output_file: output/03_openings_collected.md
+
+propose_rebuttal:
+  description: >
+    You are the PROPOSITION, arguing IN FAVOR of the motion: "{motion}".
+
+    This is your REBUTTAL - your final speech. You have now seen the opposition's opening statement.
+
+    Your rebuttal must accomplish THREE things:
+
+    1. REFUTE THE OPPOSITION (approximately 50% of your speech):
+       Attack their arguments using these techniques:
+       - Challenge their PREMISES: Are their foundational claims actually true?
+       - Break the LOGIC: Does their conclusion actually follow from their premises?
+       - Minimize IMPACT: Even if true, does it matter as much as they claim?
+       - Provide COUNTER-EXAMPLES: Show cases where their argument fails
+       - Identify FALLACIES: Point out any logical errors (straw man, false dichotomy, etc.)
+
+       Be specific - quote or directly reference what they said, then explain why it fails.
+
+    2. DEFEND YOUR CASE (approximately 25% of your speech):
+       If the opposition attacked your opening arguments:
+       - Explain why their attacks fail
+       - Provide additional support for challenged points
+       - Clarify any misrepresentations of your position
+
+    3. WEIGH THE DEBATE (approximately 25% of your speech):
+       Explain why the judge should vote for you:
+       - Compare the strongest arguments on each side
+       - Explain why your impacts matter more
+       - Show what remains standing after the clash
+
+    Remember: This is your FINAL chance to speak. Leave no major opposition argument unaddressed.
+    The judge will assume any uncontested argument is conceded.
+  expected_output: >
+    A comprehensive rebuttal (500-800 words) containing:
+    - Direct refutation of the opposition's key arguments with specific references
+    - Defense of your own arguments if they were attacked
+    - Clear weighing explaining why the proposition wins overall
+  agent: debater
+  output_file: output/04_propose_rebuttal.md
+  async_execution: true
+  context:
+    - oppose_opening
+    - collect_openings
+
+oppose_rebuttal:
+  description: >
+    You are the OPPOSITION, arguing AGAINST the motion: "{motion}".
+
+    This is your REBUTTAL - your final speech. You have now seen the proposition's opening statement.
+
+    Your rebuttal must accomplish THREE things:
+
+    1. REFUTE THE PROPOSITION (approximately 50% of your speech):
+       Attack their arguments using these techniques:
+       - Challenge their PREMISES: Are their foundational claims actually true?
+       - Break the LOGIC: Does their conclusion actually follow from their premises?
+       - Minimize IMPACT: Even if true, does it matter as much as they claim?
+       - Provide COUNTER-EXAMPLES: Show cases where their argument fails
+       - Identify FALLACIES: Point out any logical errors (straw man, false dichotomy, etc.)
+
+       Be specific - quote or directly reference what they said, then explain why it fails.
+
+    2. DEFEND YOUR CASE (approximately 25% of your speech):
+       If the proposition attacked your opening arguments:
+       - Explain why their attacks fail
+       - Provide additional support for challenged points
+       - Clarify any misrepresentations of your position
+
+    3. WEIGH THE DEBATE (approximately 25% of your speech):
+       Explain why the judge should vote for you:
+       - Compare the strongest arguments on each side
+       - Explain why your impacts matter more
+       - Show what remains standing after the clash
+
+    Remember: This is your FINAL chance to speak. Leave no major proposition argument unaddressed.
+    The judge will assume any uncontested argument is conceded.
+  expected_output: >
+    A comprehensive rebuttal (500-800 words) containing:
+    - Direct refutation of the proposition's key arguments with specific references
+    - Defense of your own arguments if they were attacked
+    - Clear weighing explaining why the opposition wins overall
+  agent: debater
+  output_file: output/05_oppose_rebuttal.md
+  async_execution: true
+  context:
+    - propose_opening
+    - collect_openings
+
+decide:
+  description: >
+    You must now render judgment on this debate about the motion: "{motion}".
+
+    You have observed:
+    1. The PROPOSITION's opening statement (arguing FOR the motion)
+    2. The OPPOSITION's opening statement (arguing AGAINST the motion)
+    3. The PROPOSITION's rebuttal
+    4. The OPPOSITION's rebuttal
+
+    CRITICAL PRINCIPLES FOR FAIR ADJUDICATION:
+
+    1. JUDGE ONLY WHAT WAS ARGUED:
+       - Base your decision solely on arguments presented in the debate
+       - Do NOT factor in your own knowledge about the topic
+       - Do NOT penalize either side for arguments they "should have made"
+       - An argument not made cannot win; an argument not refuted stands
+
+    2. PERSONAL VIEWS ARE IRRELEVANT:
+       - You may personally agree or disagree with the motion
+       - This must NOT influence your decision
+       - A side can win even if you believe their position is wrong in reality
+
+    3. EVALUATE USING THIS FRAMEWORK:
+
+       A. ARGUMENT QUALITY (for each side):
+          - Were claims clear and well-defined?
+          - Were warrants (reasons) logical and sufficient?
+          - Was evidence/examples provided and relevant?
+          - Were there any logical fallacies?
+
+       B. CLASH QUALITY (how sides engaged with each other):
+          - Did each side address the opponent's strongest arguments?
+          - Were refutations direct and effective?
+          - Did either side drop (fail to respond to) major arguments?
+          - Were there any straw-man attacks on weak versions of arguments?
+
+       C. IMPACT COMPARISON:
+          - Which side's arguments, if true, matter more?
+          - Did either side effectively weigh why their impacts outweigh?
+          - What arguments remain standing at the end of the debate?
+
+       D. BURDEN OF PROOF:
+          - Did the proposition meet its burden to prove the motion?
+          - Did the opposition provide sufficient doubt or counter-proof?
+
+    SCORING: After your analysis, assign a PREFERENCE LEVEL:
+    - ABSOLUTE: One side dominated completely; the other had no significant arguments standing
+    - HIGH: Clear winner with substantially stronger argumentation and engagement
+    - MEDIUM: Discernible winner, but the debate was competitive with good points on both sides
+    - LOW: Very close debate; winner determined by narrow margin or tiebreaker considerations
+  expected_output: >
+    A structured judicial decision (600-1000 words) containing:
+
+    1. SUMMARY OF PROPOSITION'S CASE: Key arguments and how they fared after rebuttal
+    2. SUMMARY OF OPPOSITION'S CASE: Key arguments and how they fared after rebuttal
+    3. KEY CLASHES: The 2-3 main points of contention and who won each
+    4. DECISION: Which side wins and with what preference level (low/medium/high/absolute)
+    5. REASONING: Clear explanation of why the winner prevailed, referencing specific arguments
+
+    Your decision must be fair, impartial, and based solely on the quality of argumentation presented.
+  agent: judge
+  output_file: output/06_decide.md
