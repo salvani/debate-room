@@ -4,28 +4,29 @@ propose_opening:
 
     This is your OPENING STATEMENT. You will have one chance to rebut your opponent later.
 
-    Structure your argument using the claim-warrant-impact framework:
-    1. STATE YOUR CASE: Clearly define what you are arguing and establish any key definitions
-    2. PRESENT MULTIPLE ARGUMENTS: Develop 2-3 independent lines of reasoning, each with:
-       - A clear CLAIM (what you assert)
-       - A logical WARRANT (why this claim is true)
-       - The IMPACT (why this matters for the debate)
-    3. PROVIDE EVIDENCE: Support your claims with examples, analogies, or logical demonstrations
-    4. ANTICIPATE OPPOSITION: Briefly address the strongest likely counterarguments
+    Build your case grounded in practical wisdom:
+    1. STATE YOUR POSITION: Clearly define what you are arguing and why it matters in the real world
+    2. DRAW FROM EXPERIENCE: Present 2-3 arguments rooted in:
+       - How people actually behave (not how theory says they should)
+       - Historical examples and observable patterns
+       - The practical realities of implementation and human nature
+    3. GROUND IN REALITY: Support claims with real-world examples, not abstract reasoning.
+       Remember: people choose convenience over optimization, familiar over best, accessible over cheapest.
+    4. ANTICIPATE PRACTICAL OBJECTIONS: Address likely concerns about whether this works in practice
 
-    Adapt your approach to the motion type:
-    - If FACTUAL (what is true): Focus on evidence and logical proof
-    - If VALUE-BASED (what is good/right): First establish criteria for evaluation
-    - If POLICY (what should be done): Address status quo problems, your mechanism, and benefits
+    Avoid theoretical arguments that assume:
+    - People are perfectly rational and fully informed
+    - Ideal conditions that rarely exist in practice
+    - Frictionless change without unintended consequences
 
-    Remember: You have NOT heard the opposition yet. Build a robust case that can withstand attack.
-    Argue with conviction for your position - you must genuinely advocate for this side.
+    Remember: You have NOT heard the opposition yet. Build a case that reflects how the world actually works.
+    Argue with conviction, drawing on what we know about human nature and practical constraints.
   expected_output: >
-    A well-structured opening statement (500-800 words) in favor of the motion, containing:
-    - Clear thesis and definitions
-    - 2-3 distinct arguments with claims, warrants, and impacts
-    - Supporting evidence or examples
-    - Preemptive responses to likely counterarguments
+    A well-grounded opening statement (500-800 words) in favor of the motion, containing:
+    - Clear thesis connected to real-world implications
+    - 2-3 arguments rooted in practical wisdom and observable human behavior
+    - Concrete examples from history, everyday life, or institutional reality
+    - Acknowledgment of practical challenges and how they can be addressed
   agent: debater
   output_file: output/01_propose_opening.md
   async_execution: true
@@ -36,28 +37,29 @@ oppose_opening:
 
     This is your OPENING STATEMENT. You will have one chance to rebut your opponent later.
 
-    Structure your argument using the claim-warrant-impact framework:
-    1. STATE YOUR CASE: Clearly define your opposition and challenge any problematic definitions
-    2. PRESENT MULTIPLE ARGUMENTS: Develop 2-3 independent lines of reasoning, each with:
-       - A clear CLAIM (what you assert)
-       - A logical WARRANT (why this claim is true)
-       - The IMPACT (why this matters for the debate)
-    3. PROVIDE EVIDENCE: Support your claims with examples, analogies, or logical demonstrations
-    4. ANTICIPATE PROPOSITION: Briefly address the strongest likely arguments for the motion
+    Build your case grounded in practical wisdom:
+    1. STATE YOUR OPPOSITION: Clearly define why the motion fails when tested against reality
+    2. DRAW FROM EXPERIENCE: Present 2-3 arguments rooted in:
+       - How people and institutions actually behave under real conditions
+       - Historical examples where similar ideas failed or backfired
+       - Unintended consequences and practical obstacles the motion ignores
+    3. GROUND IN REALITY: Support claims with real-world examples, not abstract reasoning.
+       Expose where the motion assumes unrealistic conditions or ignores human nature.
+    4. ANTICIPATE PRACTICAL DEFENSES: Address the strongest real-world cases for the motion
 
-    Adapt your approach to the motion type:
-    - If FACTUAL (what is true): Challenge evidence, show alternative explanations, or prove the opposite
-    - If VALUE-BASED (what is good/right): Contest their criteria or show your values outweigh theirs
-    - If POLICY (what should be done): Defend status quo, attack the mechanism, or show harms outweigh benefits
+    Avoid theoretical arguments that assume:
+    - People are perfectly rational and fully informed
+    - Ideal conditions that rarely exist in practice
+    - Frictionless change without unintended consequences
 
-    Remember: You have NOT heard the proposition yet. Build a robust case that can withstand attack.
-    Argue with conviction for your position - you must genuinely advocate against the motion.
+    Remember: You have NOT heard the proposition yet. Build a case that reflects how the world actually works.
+    Argue with conviction, exposing the gap between theory and practice.
   expected_output: >
-    A well-structured opening statement (500-800 words) against the motion, containing:
-    - Clear counter-thesis and any definitional challenges
-    - 2-3 distinct arguments with claims, warrants, and impacts
-    - Supporting evidence or examples
-    - Preemptive responses to likely proposition arguments
+    A well-grounded opening statement (500-800 words) against the motion, containing:
+    - Clear counter-thesis exposing the motion's disconnect from reality
+    - 2-3 arguments rooted in practical wisdom and observable human behavior
+    - Concrete examples of similar ideas failing in practice
+    - Honest engagement with why the motion might seem appealing but falls short
   agent: debater
   output_file: output/02_oppose_opening.md
   async_execution: true
@@ -80,35 +82,34 @@ propose_rebuttal:
 
     Your rebuttal must accomplish THREE things:
 
-    1. REFUTE THE OPPOSITION (approximately 50% of your speech):
-       Attack their arguments using these techniques:
-       - Challenge their PREMISES: Are their foundational claims actually true?
-       - Break the LOGIC: Does their conclusion actually follow from their premises?
-       - Minimize IMPACT: Even if true, does it matter as much as they claim?
-       - Provide COUNTER-EXAMPLES: Show cases where their argument fails
-       - Identify FALLACIES: Point out any logical errors (straw man, false dichotomy, etc.)
+    1. CHALLENGE THEIR PICTURE OF REALITY (approximately 50% of your speech):
+       Test their arguments against how the world actually works:
+       - Do their examples hold up? Are there counter-examples from real experience?
+       - Are they assuming unrealistic conditions or idealized human behavior?
+       - Do they ignore practical factors like convenience, habit, status, or emotion?
+       - Have similar situations played out differently in practice?
 
-       Be specific - quote or directly reference what they said, then explain why it fails.
+       Be specific - reference what they said, then show where reality contradicts them.
 
-    2. DEFEND YOUR CASE (approximately 25% of your speech):
-       If the opposition attacked your opening arguments:
-       - Explain why their attacks fail
-       - Provide additional support for challenged points
-       - Clarify any misrepresentations of your position
+    2. STRENGTHEN YOUR CASE (approximately 25% of your speech):
+       If the opposition challenged your arguments:
+       - Provide additional real-world evidence
+       - Show how your position accounts for practical obstacles they raised
+       - Demonstrate that your view better matches observable human behavior
 
-    3. WEIGH THE DEBATE (approximately 25% of your speech):
-       Explain why the judge should vote for you:
-       - Compare the strongest arguments on each side
-       - Explain why your impacts matter more
-       - Show what remains standing after the clash
+    3. WEIGH WHAT MATTERS IN PRACTICE (approximately 25% of your speech):
+       Explain why your position is more grounded:
+       - Which arguments reflect how people and institutions actually behave?
+       - Whose view better accounts for unintended consequences and human limitations?
+       - What would actually happen if each position were tested in the real world?
 
     Remember: This is your FINAL chance to speak. Leave no major opposition argument unaddressed.
-    The judge will assume any uncontested argument is conceded.
+    Ground your rebuttal in practical wisdom, not abstract logic.
   expected_output: >
     A comprehensive rebuttal (500-800 words) containing:
-    - Direct refutation of the opposition's key arguments with specific references
-    - Defense of your own arguments if they were attacked
-    - Clear weighing explaining why the proposition wins overall
+    - Direct challenges to the opposition's assumptions about reality
+    - Additional real-world evidence strengthening your position
+    - Clear explanation of why your view better reflects how the world works
   agent: debater
   output_file: output/04_propose_rebuttal.md
   async_execution: true
@@ -124,35 +125,34 @@ oppose_rebuttal:
 
     Your rebuttal must accomplish THREE things:
 
-    1. REFUTE THE PROPOSITION (approximately 50% of your speech):
-       Attack their arguments using these techniques:
-       - Challenge their PREMISES: Are their foundational claims actually true?
-       - Break the LOGIC: Does their conclusion actually follow from their premises?
-       - Minimize IMPACT: Even if true, does it matter as much as they claim?
-       - Provide COUNTER-EXAMPLES: Show cases where their argument fails
-       - Identify FALLACIES: Point out any logical errors (straw man, false dichotomy, etc.)
+    1. CHALLENGE THEIR PICTURE OF REALITY (approximately 50% of your speech):
+       Test their arguments against how the world actually works:
+       - Do their examples hold up? Are there counter-examples from real experience?
+       - Are they assuming unrealistic conditions or idealized human behavior?
+       - Do they ignore practical factors like convenience, habit, status, or emotion?
+       - Have similar situations played out differently in practice?
 
-       Be specific - quote or directly reference what they said, then explain why it fails.
+       Be specific - reference what they said, then show where reality contradicts them.
 
-    2. DEFEND YOUR CASE (approximately 25% of your speech):
-       If the proposition attacked your opening arguments:
-       - Explain why their attacks fail
-       - Provide additional support for challenged points
-       - Clarify any misrepresentations of your position
+    2. STRENGTHEN YOUR CASE (approximately 25% of your speech):
+       If the proposition challenged your arguments:
+       - Provide additional real-world evidence
+       - Show how your position accounts for practical realities they dismissed
+       - Demonstrate that your view better matches observable human behavior
 
-    3. WEIGH THE DEBATE (approximately 25% of your speech):
-       Explain why the judge should vote for you:
-       - Compare the strongest arguments on each side
-       - Explain why your impacts matter more
-       - Show what remains standing after the clash
+    3. WEIGH WHAT MATTERS IN PRACTICE (approximately 25% of your speech):
+       Explain why your position is more grounded:
+       - Which arguments reflect how people and institutions actually behave?
+       - Whose view better accounts for unintended consequences and human limitations?
+       - What would actually happen if the motion were implemented in the real world?
 
     Remember: This is your FINAL chance to speak. Leave no major proposition argument unaddressed.
-    The judge will assume any uncontested argument is conceded.
+    Ground your rebuttal in practical wisdom, not abstract logic.
   expected_output: >
     A comprehensive rebuttal (500-800 words) containing:
-    - Direct refutation of the proposition's key arguments with specific references
-    - Defense of your own arguments if they were attacked
-    - Clear weighing explaining why the opposition wins overall
+    - Direct challenges to the proposition's assumptions about reality
+    - Additional real-world evidence strengthening your position
+    - Clear explanation of why your view better reflects how the world works
   agent: debater
   output_file: output/05_oppose_rebuttal.md
   async_execution: true
@@ -185,42 +185,42 @@ decide:
 
     3. EVALUATE USING THIS FRAMEWORK:
 
-       A. ARGUMENT QUALITY (for each side):
-          - Were claims clear and well-defined?
-          - Were warrants (reasons) logical and sufficient?
-          - Was evidence/examples provided and relevant?
-          - Were there any logical fallacies?
+       A. PRACTICAL GROUNDING (for each side):
+          - Were arguments rooted in how people and institutions actually behave?
+          - Did they draw on real-world examples and observable patterns?
+          - Did they avoid assuming perfect rationality or ideal conditions?
+          - Did they acknowledge human nature: habit, convenience, emotion, status?
 
-       B. CLASH QUALITY (how sides engaged with each other):
-          - Did each side address the opponent's strongest arguments?
-          - Were refutations direct and effective?
-          - Did either side drop (fail to respond to) major arguments?
-          - Were there any straw-man attacks on weak versions of arguments?
+       B. REALITY-TESTING (how sides engaged with each other):
+          - Did each side effectively challenge the other's picture of reality?
+          - Were counter-examples drawn from genuine experience or observation?
+          - Did either side expose unrealistic assumptions in their opponent's case?
+          - Who better accounted for unintended consequences and practical obstacles?
 
-       C. IMPACT COMPARISON:
-          - Which side's arguments, if true, matter more?
-          - Did either side effectively weigh why their impacts outweigh?
-          - What arguments remain standing at the end of the debate?
+       C. WHAT WOULD ACTUALLY HAPPEN:
+          - Which side's view better predicts real-world outcomes?
+          - Whose arguments would hold up when tested against actual human behavior?
+          - Who addressed the gap between theory and practice more convincingly?
 
        D. BURDEN OF PROOF:
-          - Did the proposition meet its burden to prove the motion?
-          - Did the opposition provide sufficient doubt or counter-proof?
+          - Did the proposition show the motion works in practice, not just in theory?
+          - Did the opposition demonstrate practical problems the proposition ignored?
 
     SCORING: After your analysis, assign a PREFERENCE LEVEL:
-    - ABSOLUTE: One side dominated completely; the other had no significant arguments standing
-    - HIGH: Clear winner with substantially stronger argumentation and engagement
-    - MEDIUM: Discernible winner, but the debate was competitive with good points on both sides
-    - LOW: Very close debate; winner determined by narrow margin or tiebreaker considerations
+    - ABSOLUTE: One side's view of reality was far more grounded; the other argued in a vacuum
+    - HIGH: Clear winner whose arguments were substantially more rooted in practical wisdom
+    - MEDIUM: Discernible winner, but both sides engaged meaningfully with real-world considerations
+    - LOW: Very close; both showed practical understanding, winner determined by narrow margin
   expected_output: >
     A structured judicial decision (600-1000 words) containing:
 
-    1. SUMMARY OF PROPOSITION'S CASE: Key arguments and how they fared after rebuttal
-    2. SUMMARY OF OPPOSITION'S CASE: Key arguments and how they fared after rebuttal
-    3. KEY CLASHES: The 2-3 main points of contention and who won each
+    1. SUMMARY OF PROPOSITION'S CASE: Key arguments and how well they reflect practical reality
+    2. SUMMARY OF OPPOSITION'S CASE: Key arguments and how well they reflect practical reality
+    3. KEY CLASHES: The 2-3 main points where the sides' views of reality conflicted, and who was more convincing
     4. DECISION: Which side wins and with what preference level (low/medium/high/absolute)
-    5. REASONING: Clear explanation of why the winner prevailed, referencing specific arguments
+    5. REASONING: Clear explanation focusing on whose arguments better matched how the world actually works
 
-    Your decision must be fair, impartial, and based solely on the quality of argumentation presented.
+    Your decision must be fair, impartial, and reward arguments grounded in practical wisdom over theoretical elegance.
   agent: judge
   output_file: output/06_decide.md
   context:
