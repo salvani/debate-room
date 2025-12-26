@@ -1,10 +1,13 @@
 """Gradio GUI for the debate system."""
 import threading
+import time
 from pathlib import Path
 import gradio as gr
 
+from crewai.events import crewai_event_bus
+
 from .crew import DebateRoom
-from .progress_tracker import DebateProgressTracker
+from .progress_tracker import DebateProgressTracker, EventDrivenProgressTracker
 from gradio.themes.utils import fonts
 
 
@@ -60,43 +63,68 @@ def run_debate_with_progress(motion: str, progress=gr.Progress()):
     if not motion or not motion.strip():
         return "Please enter a debate motion.", load_markdown_output("Judge's Decision")
 
-    # Initialize progress tracker
-    tracker = DebateProgressTracker(output_dir="output")
+    # Clear old output files using the legacy tracker
+    legacy_tracker = DebateProgressTracker(output_dir="output")
+    legacy_tracker.clear_output_dir()
 
-    # Clear old output files before starting new debate
-    tracker.clear_output_dir()
+    # Initialize event-driven tracker (no callback - we'll poll state instead)
+    tracker = EventDrivenProgressTracker()
 
-    # Track progress in a separate thread
-    progress_complete = threading.Event()
-    last_progress = [0, "Starting debate..."]
+    # Shared state for crew execution
+    crew_result = [None]
+    crew_error = [None]
+    crew_done = threading.Event()
 
-    def update_progress():
-        """Update progress in background thread."""
-        for prog, status in tracker.monitor_progress(poll_interval=1.5):
-            last_progress[0] = prog
-            last_progress[1] = status
-            progress(prog / 100, desc=status)
+    def run_crew():
+        """Run the crew in a background thread."""
+        try:
+            with crewai_event_bus.scoped_handlers():
+                tracker.register_handlers()
+                crew_result[0] = DebateRoom().crew().kickoff(inputs={'motion': motion})
+        except Exception as e:
+            crew_error[0] = e
+        finally:
+            crew_done.set()
 
-    # Start progress monitoring in background
-    progress_thread = threading.Thread(target=update_progress, daemon=True)
-    progress_thread.start()
+    # Start crew in background thread
+    crew_thread = threading.Thread(target=run_crew, daemon=True)
+    crew_thread.start()
 
-    try:
-        # Run the debate (progress updates handled by background thread)
-        result = DebateRoom().crew().kickoff(inputs={'motion': motion})
+    # Show initial progress
+    progress(0, desc="Starting debate crew...")
 
-        # Wait for progress thread to complete
-        progress_thread.join(timeout=5)
+    # Poll tracker state and update Gradio progress until crew is done
+    last_status = ""
+    while not crew_done.is_set():
+        prog, status, has_error, error_msg = tracker.get_state()
+        if status != last_status:
+            progress(prog, desc=status)
+            last_status = status
+        time.sleep(0.3)  # Poll interval
 
-        progress(1.0, desc="Debate complete!")
+    # Wait for thread to fully complete
+    crew_thread.join(timeout=5)
 
-        # Load the judge's decision to display
-        judge_output = load_markdown_output("Judge's Decision")
+    # Final progress update
+    progress(1.0, desc="Debate complete!")
 
-        return f"**Debate completed successfully!**\n\nThe judge's decision is shown below. Use the radio buttons to view other speeches.", judge_output
+    # Check for crew execution errors
+    if crew_error[0]:
+        return f"**Error running debate:**\n\n{str(crew_error[0])}", load_markdown_output("Judge's Decision")
 
-    except Exception as e:
-        return f"**Error running debate:**\n\n{str(e)}", load_markdown_output("Judge's Decision")
+    # Check for errors captured during execution
+    _, _, has_error, error_msg = tracker.get_state()
+    if has_error:
+        return f"**Debate completed with warnings:**\n\n{error_msg}", load_markdown_output("Judge's Decision")
+
+    # Load the judge's decision to display
+    judge_output = load_markdown_output("Judge's Decision")
+
+    return (
+        "**Debate completed successfully!**\n\n"
+        "The judge's decision is shown below. Use the radio buttons to view other speeches.",
+        judge_output
+    )
 
 
 def create_gradio_interface():
