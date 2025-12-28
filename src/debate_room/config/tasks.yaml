@@ -114,6 +114,7 @@ propose_rebuttal:
   output_file: output/04_propose_rebuttal.md
   async_execution: true
   context:
+    - propose_opening
     - oppose_opening
     - collect_openings
 
@@ -157,6 +158,7 @@ oppose_rebuttal:
   output_file: output/05_oppose_rebuttal.md
   async_execution: true
   context:
+    - oppose_opening
     - propose_opening
     - collect_openings
 
