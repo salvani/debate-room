@@ -67,6 +67,8 @@ The GUI provides a web interface where you can:
 - View real-time progress
 - Browse all speeches and the judge's decision
 
+![Debate Room GUI](docs/gui.png)
+
 ## How It Works
 
 The debate follows a formal structure with six sequential phases:
@@ -108,6 +110,8 @@ debate_room/
 │   └── config/
 │       ├── agents.yaml      # Agent configurations (debater, judge)
 │       └── tasks.yaml       # Task definitions (openings, rebuttals, decision)
+├── docs/                    # Documentation assets
+│   └── gui.png              # GUI screenshot
 ├── output/                  # Debate outputs (*.md files, git-ignored)
 ├── .env.example             # Environment variables template
 ├── pyproject.toml           # Project configuration
@@ -191,26 +195,30 @@ All debate outputs are saved in the `output/` directory:
 | `05_oppose_rebuttal.md` | Opposition rebuttal |
 | `06_decide.md` | Judge's final decision with preference rating |
 
-## Development
-
-### Running Tests
-
-```bash
-uv run test
-```
-
-### Other Commands
-
-- `uv run train` - Training mode (CrewAI feature)
-- `uv run replay` - Replay previous debate runs
-- `uv run run_with_trigger` - Run with trigger conditions
-
 ## Technology Stack
 
 - **CrewAI 1.7.0** - Multi-agent orchestration framework
-- **Google Gemini 3 Pro** - Default LLM for agents
 - **Gradio 4.x** - Web-based GUI interface
 - **UV** - Fast Python package manager
+- **Google Gemini 3 Pro** - Default LLM for agents
+
+## Why Crew (Not Flow)?
+
+CrewAI offers two main abstractions: **Crews** and **Flows**.
+
+| Aspect | Crew (used here) | Flow |
+|--------|------------------|------|
+| **Model** | Autonomous agents collaborating | Event-driven sequential/branching steps |
+| **Control** | Agents decide how to collaborate | You define exact execution paths |
+| **Best for** | Creative, emergent problem-solving | Predictable, auditable pipelines |
+
+This project uses a **Crew** because:
+
+1. **Debate is collaborative** - The debater and judge roles naturally fit the agent-based model
+2. **Autonomy is desired** - We want the debater to craft creative arguments, not follow rigid templates
+3. **Sequential process suffices** - `Process.sequential` enforces the correct order (openings -> rebuttals -> judgment)
+
+A **Flow** would be preferable if you needed conditional branching (e.g., "if tie, run another round"), direct LLM calls without agent overhead, or integration into a larger production pipeline. The most powerful pattern is **Flows orchestrating Crews** for complex workflows requiring both creativity and precise control.
 
 ## Contributing
 

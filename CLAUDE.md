@@ -33,6 +33,16 @@ The project uses CrewAI's multi-agent framework with a sequential process flow:
    - Kicks off crew execution and prints raw result
    - Default motion: "The solution to the trolley problem is to stick to your path, whatever it may be."
 
+### Why Crew (Not Flow)?
+
+CrewAI offers two abstractions: **Crews** (autonomous agents collaborating) and **Flows** (event-driven sequential/branching steps). This project uses a Crew because:
+
+- Debate naturally fits the agent-based model with distinct debater/judge roles
+- We want creative, autonomous argument generation rather than rigid templates
+- `Process.sequential` provides sufficient ordering control
+
+A Flow would be preferable for conditional branching, direct LLM calls without agent overhead, or production pipelines. Consider **Flows orchestrating Crews** for complex workflows requiring both creativity and precise control.
+
 ### Output Structure
 
 Debate results are written to the `output/` directory:
@@ -87,10 +97,6 @@ Required environment variables in `.env`:
 Available via `pyproject.toml`:
 - `debate_room` or `run_crew`: Run the main debate (CLI)
 - `debate_gui`: Run the Gradio web interface
-- `train`: Training mode (CrewAI feature)
-- `replay`: Replay previous debate runs
-- `test`: Test mode
-- `run_with_trigger`: Run with trigger conditions
 
 ## Key Implementation Details
 
@@ -109,13 +115,6 @@ The project includes a Gradio-based web interface (`src/debate_room/app.py`):
 - View all debate outputs (openings, rebuttals, judge's decision)
 - Progress monitoring via background threads
 
-### Custom Tools
-
-The `src/debate_room/tools/` directory can contain custom tool implementations:
-- Custom tools inherit from `BaseTool`
-- Use Pydantic models for input schema validation
-- Tools can be added to agents by importing and assigning to the agent's `tools` parameter
-
 ## Adding New Features
 
 ### To modify the debate motion:
@@ -131,12 +130,6 @@ Edit the `inputs` dictionary in `src/debate_room/main.py` or use the GUI interfa
 2. Create `@task` method in `crew.py` returning `Task(config=self.tasks_config['task_name'])`
 3. The task will be automatically added to `self.tasks` via the decorator
 4. Tasks execute in the order they are defined when using sequential process
-
-### To add custom tools to agents:
-1. Create a new tool class in `src/debate_room/tools/` inheriting from `BaseTool`
-2. Define input schema using Pydantic `BaseModel`
-3. Implement the `_run()` method with tool logic
-4. Import and assign to agent's `tools` parameter in `crew.py`
 
 ### To modify debate flow:
 Change `Process.sequential` to `Process.hierarchical` in `crew.py` for manager-based task delegation

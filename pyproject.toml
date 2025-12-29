@@ -13,10 +13,6 @@ dependencies = [
 debate_room = "debate_room.main:run"
 run_crew = "debate_room.main:run"
 debate_gui = "debate_room.app:launch"
-train = "debate_room.main:train"
-replay = "debate_room.main:replay"
-test = "debate_room.main:test"
-run_with_trigger = "debate_room.main:run_with_trigger"
 
 [build-system]
 requires = ["hatchling"]
